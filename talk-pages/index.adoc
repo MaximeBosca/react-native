@@ -6,7 +6,7 @@
 :icons: font
 :revealjs_totalTime: 1800
 :source-highlighter: highlight.js
-:highlightjs-languages: javascript
+:highlightjs-languages: ts, tsx
 
 
 include::intro.adoc[]

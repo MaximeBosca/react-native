@@ -5,4 +5,43 @@ Composants 'react native' traduits en composants Natifs
 --
 image::images/diagram-react.svg[]
 
-=== React
+=== Typescript
+
+[source, typescript]
+----
+message.toLowerCase();
+message();
+----
+[%step]
+* Est ce que message a une propriété toLowerCase ?
+* Est ce que message est appellable ?
+
+=== !
+image::images/autocomplete.png[]
+
+=== Types
+
+[%step]
+[source, typescript]
+----
+type texte = string
+----
+[%step]
+[source, typescript]
+----
+type constante = 'Hello World'
+----
+[%step]
+[source, typescript]
+----
+type status = 'loading' | 'ready' | 'erreur'
+----
+
+=== Composants
+
+[source,typescriptjsx]
+--
+<View>
+    <Text>Bonjour</Text>
+</View>
+--
