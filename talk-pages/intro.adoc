@@ -6,3 +6,9 @@ Composants 'react native' traduits en composants Natifs
 image::images/diagram-react.svg[]
 
 === React
+
+=== Test
+[.step]
+* Bonjour
+* hello
+* au revoir
