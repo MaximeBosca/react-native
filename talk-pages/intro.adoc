@@ -1,0 +1,8 @@
+== React Native c'est quoi ?
+[.notes]
+--
+Composants 'react native' traduits en composants Natifs
+--
+image::images/diagram-react.svg[]
+
+=== React

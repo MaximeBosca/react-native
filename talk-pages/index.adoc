@@ -9,4 +9,4 @@
 :highlightjs-languages: javascript
 
 
-Bonjour
+include::intro.adoc[]
