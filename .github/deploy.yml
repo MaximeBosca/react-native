@@ -1,0 +1,51 @@
+name: Build and publish talk
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the "main" branch
+  workflow_dispatch:
+  push:
+    branches: [ "main" ]
+  # Allows you to run this workflow manually from the Actions tab
+permissions :
+  contents : write
+jobs :
+  build-and-publish :
+    concurrency: ${{ github.workflow }}-${{ github.ref }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Checkout reveal.js
+        uses: actions/checkout@v3
+        with:
+          repository: hakimel/reveal.js
+          ref: 4.2.0
+          path: reveal.js
+
+      - name: Build reveal.js
+        run: npm ci && rm -rf node_modules\
+        working-directory: reveal.js
+
+      - name: Build talk pages
+        uses: addnab/docker-run-action@v3
+        with:
+          image: asciidoctor/docker-asciidoctor:latest
+          options: -v ${{ github.workspace}}/talk-pages:/documents
+          run: |
+            asciidoctor-revealjs /documents/index.adoc
+
+      - name: Copy build to folder
+        run : |
+          mkdir -p reveal.js/dist/theme/images && \
+          mkdir -p build/reveal.js/dist && \
+          cp -r talk-pages/*.html build/ && \
+          cp -r reveal.js/dist/* build/reveal.js/dist/ && \
+          cp -r reveal.js/plugin build/reveal.js/
+        working-directory: .
+
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: ./build
+          branch: gh-pages
