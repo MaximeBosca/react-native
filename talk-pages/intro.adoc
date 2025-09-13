@@ -39,9 +39,9 @@ type status = 'loading' | 'ready' | 'erreur'
 
 === Composants
 
-[source,typescriptjsx]
+[source,tsx]
 --
-<View>
+return <View>
     <Text>Bonjour</Text>
 </View>
 --
