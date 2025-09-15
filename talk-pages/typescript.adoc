@@ -115,3 +115,19 @@ type Result<T> = {
 const resultString: Result<string> = {status: 'ready', data: 'Bonjour'}
 const resultNumber: Result<number> = {status: 'ready', data: 20}
 ----
+
+=== Solution
+[source, typescript]
+----
+type Status = 'loading' | 'ready' | 'error'
+
+export type Result<T> = {
+    status: 'loading'
+} | {
+    status: 'ready'
+    data: T
+} | {
+    status: 'error'
+    error?: Error
+}
+----
