@@ -98,6 +98,10 @@ export default function Terminer() {
 
 === useState
 
+[%step]
+* Comment conserver et faire évoluer l'état de mes données ?
+* https://snack.expo.dev/@zolorah/usestate-demo[Test-It, window=_blank]
+[%step]
 [source, tsx]
 --
 import {useState} from 'react';
@@ -113,7 +117,6 @@ export default function PressApp() {
   );
 }
 --
-https://snack.expo.dev/@zolorah/usestate-demo[Test-It, window=_blank]
 
 === Context
 image::images/react-context.svg[]
