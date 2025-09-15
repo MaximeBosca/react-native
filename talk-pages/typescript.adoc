@@ -112,8 +112,14 @@ type Result<T> = {
     status: Status,
     data: T
 }
-const resultString: Result<string> = {status: 'ready', data: 'Bonjour'}
-const resultNumber: Result<number> = {status: 'ready', data: 20}
+const resultString: Result<string> = {
+    status: 'ready',
+    data: 'Bonjour'
+}
+const resultNumber: Result<number> = {
+    status: 'ready',
+    data: 20
+}
 ----
 
 === Solution
