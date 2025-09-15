@@ -11,3 +11,4 @@
 
 include::intro.adoc[]
 include::typescript.adoc[]
+include::react.adoc[]

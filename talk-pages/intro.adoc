@@ -5,55 +5,20 @@ Composants 'react native' traduits en composants Natifs
 --
 image::images/diagram-react.svg[]
 
-=== Composants
-
-[source,tsx]
+=== Organisation de l'app
+[.notes]
 --
-<View>
-    <Text>Bonjour</Text>
-</View>
+'Pages' comme en web organisées en dossier
 --
+image::images/organisation.png[]
 
-=== Code JS
+=== Export Default Function
+.terminer.tsx
 [source, tsx]
 --
-<View>
-    <Text>Bonjour, {name.toUpperCase()} !</Text>
-</View>
---
-
-=== Styles
-[source,tsx]
---
-const style = {
-    backgroundColor: 'red',
-    marginBottom: 20
+export default function Terminer() {
+    return <WithSmallHeader title="Terminer">
+        <ThemedText>Terminer la visite !</ThemedText>
+    </WithSmallHeader>
 }
---
-[source,tsx]
---
-<View style={style}>
-</View>
---
-
-=== !
-[source,tsx]
---
-import { StyleSheet } from 'react-native'; // important
-
-const styles = StyleSheet.create({
-    container: {
-        backgroundColor: 'red',
-        marginBottom: 20
-    },
-    text: {
-        color: 'blue'
-    }
-})
---
-[source,tsx]
---
-<View style={styles.container}>
-    <Text style={styles.text}>Ce texte est bleu sur fond rouge !</Text>
-</View>
 --
