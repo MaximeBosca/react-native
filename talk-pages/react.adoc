@@ -119,6 +119,7 @@ https://snack.expo.dev/@zolorah/usestate-demo[Test-It, window=_blank]
 image::images/react-context.svg[]
 
 === !
+.Provider
 [source, tsx]
 --
 export default function RootLayout() {
@@ -127,6 +128,7 @@ export default function RootLayout() {
   </SQLite.SQLiteProvider>
 }
 --
+.Consumer
 [%step]
 [source, tsx]
 --
