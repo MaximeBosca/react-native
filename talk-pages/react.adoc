@@ -106,7 +106,7 @@ import {Text, View, Button} from 'react-native';
 export default function PressApp() {
   const [numberPressed, setNumberPressed] = useState(0)
   return (
-    <View style={{marginTop: 50}}>
+    <View>
       <Text>Clicked {numberPressed} times !</Text>
       <Button title='Press Me !' onPress={() => setNumberPressed(numberPressed + 1)}/>
     </View>
