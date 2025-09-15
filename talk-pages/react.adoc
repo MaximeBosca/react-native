@@ -113,10 +113,26 @@ export default function PressApp() {
   );
 }
 --
-https://snack.expo.dev/@zolorah/usestate-demo[Test-It]
+https://snack.expo.dev/@zolorah/usestate-demo[Test-It, window=_blank]
 
 === Context
 image::images/react-context.svg[]
+
+=== !
+[source, tsx]
+--
+export default function RootLayout() {
+  return <SQLite.SQLiteProvider databaseName="its.db">
+    <App/>
+  </SQLite.SQLiteProvider>
+}
+--
+[%step]
+[source, tsx]
+--
+const db = useSQLiteContext()
+await db.runAsync(req)
+--
 
 === React Rendering
 image::images/reactRenderDiagram.png[]
