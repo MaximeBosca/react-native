@@ -1,0 +1,11 @@
+## Programmation Asynchrone
+
+[.notes]
+--
+* Exécuter des tâches qui se résoudront éventuellement (ex: requête SQL, appel WS, etc)
+* Ne pas bloquer le reste du code en attendant que ça ait lieu
+* Ne pas juste lancer des threads et bonne chance, traiter proprement le retour et les erreurs
+--
+Schemaasync
+
+### En Javascript : Promise
