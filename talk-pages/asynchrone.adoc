@@ -6,6 +6,132 @@
 * Ne pas bloquer le reste du code en attendant que ça ait lieu
 * Ne pas juste lancer des threads et bonne chance, traiter proprement le retour et les erreurs
 --
-Schemaasync
+### Synchrone VS Asynchrone
+image::https://www.koyeb.com/static/images/blog/sync-vs-async-schema.png[]
 
 ### En Javascript : Promise
+https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Promise[Voir la doc !]
+[source, ts]
+--
+const myPromise = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    resolve("foo");
+  }, 300);
+});
+--
+* S'exécute immédiatement
+* Se résoudra plus tard, l'exécution du code continue en attendant.
+
+### Chaînage
+
+[source, ts]
+--
+myPromise
+    .then(gererCompletionA, gererErreurA)
+    .then(gererCompletionB, gererErreurB)
+--
+
+[%step]
+[source, ts]
+--
+.then(
+    (resultat) => {
+        console.log('Terminé !' + resultat)
+    }, 
+    (erreur) => {
+        console.error('Erreur !' + erreur)
+    }
+)
+--
+
+### !
+[source, ts]
+--
+myPromise
+    .then(gererCompletionA)
+    .catch(gererErreurA)
+--
+
+### !
+[source, ts]
+--
+myPromise
+    .then(gererCompletionA)
+    .catch(gererErreurA)
+    .then(...)
+    .then(...)
+    .catch(...)
+    .finally(() => console.log('terminé'))
+--
+
+### Promise.all
+Rejetée avec la première erreur ou Résolue avec toutes les valeurs
+[source, ts]
+--
+const promise1 = Promise.resolve(3);
+const promise2 = 42;
+const promise3 = new Promise((resolve, reject) => {
+  setTimeout(resolve, 100, "foo");
+});
+
+Promise.all([promise1, promise2, promise3]).then((values) => {
+  console.log(values);
+});
+// Expected output: Array [3, 42, "foo"]
+--
+
+### Primise.allSettled
+Résolue avec tous les résultats : status (fulfilled ou rejected) et value/reason
+[source, ts]
+--
+Promise.allSettled([
+  Promise.resolve(33),
+  new Promise((resolve) => setTimeout(() => resolve(66), 0)),
+  99,
+  Promise.reject(new Error("an error")),
+]).then((values) => console.log(values));
+
+// [
+//   { status: 'fulfilled', value: 33 },
+//   { status: 'fulfilled', value: 66 },
+//   { status: 'fulfilled', value: 99 },
+//   { status: 'rejected', reason: Error: an error }
+// ]
+--
+
+### Autres
+* any() -> complétée avec la première complétée, rejetée si elles sont toutes rejetées
+* race() -> complétéee ou rejetée avec la première terminée.
+
+### Async function
+[source, ts]
+--
+function getProcessedData(url) {
+  return downloadData(url) // returns a promise
+    .catch((e) => downloadFallbackData(url)) // returns a promise
+    .then((v) => processDataInWorker(v)); // returns a promise
+}
+--
+
+### !
+[source, ts]
+--
+async function getProcessedData(url) {
+  let v;
+  try {
+    v = await downloadData(url);
+  } catch (e) {
+    v = await downloadFallbackData(url);
+  }
+  return processDataInWorker(v);
+}
+--
+
+### !
+[source, ts]
+--
+async function getProcessedData(url) {
+  const v = await downloadData(url).catch((e) => downloadFallbackData(url));
+  return processDataInWorker(v);
+}
+--
